@@ -31,6 +31,10 @@ class Game
 		end
 
 		1.upto(rounds) do |round|
+			if block_given? 
+				puts "block was given"
+				break if yield
+			end
 			puts "\nRound Number: #{round}"
 			@players.each do |player|
 				GameTurn.take_turn(player)
@@ -38,11 +42,16 @@ class Game
 		end
 	end
 
+	# def play_round(round)
+	# 	puts "\nRound Number: #{round}"
+	# 	@players.each do |player|
+	# 		GameTurn.take_turn(player)
+	# 	end
+	# end
+
 	def print_stats
 		strong_players, wimpy_players = @players.partition {|player| player.strong?}
 
-		
-		
 		puts "#{@title} High Scores:"
 		@players.sort.each do |player|
 			formatted_name = player.name.ljust(20, '.')
@@ -62,15 +71,13 @@ class Game
 
 		@players.each do |player|
 			puts "\n#{player.name}'s points totals:"
+			player.each_found_treasure do |treasure|
+				puts "#{treasure.points} total #{treasure.name} points"
+			end
 			puts "#{player.points} grand total points"
 		end
 
 		puts "#{total_points} total points from treasures found"
-	end
-
-
-	def print
-		
 	end
 
 	def print_name_and_health(player)
@@ -86,6 +93,10 @@ if __FILE__ == $0
 	knuckleheads.add_player(player1)
 	knuckleheads.add_player(player2)
 	knuckleheads.add_player(player3)
-	knuckleheads.play(10)
+	knuckleheads.play(10) do
+		knuckleheads.total_points >= 2000
+	end
 	knuckleheads.print_stats
+
+
 end
