@@ -49,13 +49,17 @@ class Game
 	# 	end
 	# end
 
+	def high_score_entry(player)
+		formatted_name = player.name.ljust(20, '.')
+		"#{formatted_name}#{player.score}"
+	end
+
 	def print_stats
 		strong_players, wimpy_players = @players.partition {|player| player.strong?}
 
 		puts "#{@title} High Scores:"
 		@players.sort.each do |player|
-			formatted_name = player.name.ljust(20, '.')
-			puts "#{formatted_name}#{player.score}"
+			puts high_score_entry(player)
 		end
 
 		puts "#{@title} Statistics:"
@@ -83,6 +87,22 @@ class Game
 	def print_name_and_health(player)
 		puts "#{player.name} (#{player.health})"
 	end
+
+	def load_players(file)
+		File.readlines(file).each do |line|
+			add_player(Player.from_csv(line))
+			puts line
+		end
+	end
+
+	def save_high_scores(fileName="high_scores.txt")
+		File.open(fileName, "w") do |file|  
+			file.write("#{@title} High Score:")
+			@players.sort.each do |player|
+				file.puts high_score_entry(player)
+			end
+		end
+	end
 end
 
 if __FILE__ == $0
@@ -97,6 +117,6 @@ if __FILE__ == $0
 		knuckleheads.total_points >= 2000
 	end
 	knuckleheads.print_stats
-
+	knuckleheads.save_high_scores
 
 end

@@ -10,6 +10,11 @@ class Player
 		@found_treasures = Hash.new(0)
 	end
 
+	def self.from_csv(line)
+		playerName, playerHealth = line.split(',')
+		Player.new(playerName, Integer(playerHealth))
+	end
+
 	def found_treasure(treasure)
 		@found_treasures[treasure.name] += treasure.points
 
