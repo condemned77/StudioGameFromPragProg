@@ -57,7 +57,7 @@ class Game
 	def print_stats
 		strong_players, wimpy_players = @players.partition {|player| player.strong?}
 
-		puts "#{@title} High Scores:"
+		puts "#{@title} High Scores:\n"
 		@players.sort.each do |player|
 			puts high_score_entry(player)
 		end
@@ -97,7 +97,7 @@ class Game
 
 	def save_high_scores(fileName="high_scores.txt")
 		File.open(fileName, "w") do |file|  
-			file.write("#{@title} High Score:")
+			file.write("#{@title} High Score:\n")
 			@players.sort.each do |player|
 				file.puts high_score_entry(player)
 			end
