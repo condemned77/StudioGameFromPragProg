@@ -1,7 +1,10 @@
 require_relative 'treasure_trove'
+require_relative 'playable'
 
 class Player
-	attr_reader :health
+	include Playable
+
+	attr_accessor :health
 	attr_accessor :name
 
 	def initialize(name, health = 100)
@@ -28,20 +31,6 @@ class Player
 
 	def to_s
 		"Hi I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}"
-	end
-
-	def blam
-		puts "#{@name} got blamed!"
-		@health -= 10
-	end
-
-	def w00t
-		puts "#{@name} got w00ted!"
-		@health += 15
-	end
-
-	def strong?
-		@health > 100
 	end
 
 	def <=>(other)

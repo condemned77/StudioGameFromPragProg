@@ -7,7 +7,7 @@ knuckleheads = Game.new("knuckleheads")
 puts ARGV
 knuckleheads.load_players(ARGV.shift || "players.csv")
 
-player4 = ClumsyPlayer.new("Klutz")
+player4 = ClumsyPlayer.new("Klutz", 7)
 knuckleheads.add_player(player4);
 
 player5 = BerserkPlayer.new("berserki")
@@ -30,17 +30,17 @@ end
 knuckleheads.save_high_scores
 puts "high score saved"
 
-if __FILE__ == $0
-	player1 = Player.new("johnson")
-	player2 = Player.new("moe")
-	player3 = Player.new("curly")
-	player4 = ClumsyPlayer.new("Klutz")
+# if __FILE__ == $0
+# 	player1 = Player.new("johnson")
+# 	player2 = Player.new("moe")
+# 	player3 = Player.new("curly")
+# 	player4 = ClumsyPlayer.new("Klutz", 7)
 
 
-	knuckleheads = Game.new("knuckleheads")
-	knuckleheads.add_player(player1)
-	knuckleheads.add_player(player2)
-	knuckleheads.add_player(player3)
-	knuckleheads.add_player(player4)
-	knuckleheads.play(7)
-end
+# 	knuckleheads = Game.new("knuckleheads")
+# 	knuckleheads.add_player(player1)
+# 	knuckleheads.add_player(player2)
+# 	knuckleheads.add_player(player3)
+# 	knuckleheads.add_player(player4)
+# 	knuckleheads.play(7)
+# end
